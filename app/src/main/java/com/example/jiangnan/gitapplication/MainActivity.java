@@ -67,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void ListSort() {
         List<Integer> nums = new ArrayList<Integer>();
+        List<Integer> arr = new ArrayList<Integer>();
+
         nums.add(3);
         nums.add(5);
         nums.add(1);
@@ -77,10 +79,28 @@ public class MainActivity extends AppCompatActivity {
         nums.add(6);
         nums.add(7);
 
+        arr = nums;
+
         if(DEBUG) Log.d(TAG, "集合排序前＝" + nums);
         Collections.sort(nums);
         if(DEBUG) Log.d(TAG, "\n集合排序后＝" + nums);
         Collections.sort(nums,Collections.reverseOrder());
         if(DEBUG) Log.d(TAG, "\n集合反转排序后＝" + nums);
+
+        //冒泡算法
+        if(DEBUG) Log.d(TAG, "\n集合冒泡排序前＝" + arr);
+        for(int i=arr.size()-1;i>0;i--){//让比较的范围不停的减掉最后一个单元
+            for(int j=1;j<=i;j++){
+                if(arr.get(j-1)>arr.get(j)){//让2个数之间大的数排后面
+                    int tmp = arr.get(j - 1);
+                    arr.set(j - 1 , arr.get(j));
+//                    arr.get(j - 1) = arr.get(j);
+                    arr.set(j , tmp);
+//                    arr.get(j) = tmp;
+                }
+            }
+        }
+        if(DEBUG) Log.d(TAG, "\n集合冒泡排序后＝" + arr);
+
     }
 }
