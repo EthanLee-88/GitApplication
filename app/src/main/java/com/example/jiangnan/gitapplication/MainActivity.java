@@ -101,6 +101,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         if(DEBUG) Log.d(TAG, "\n集合冒泡排序后＝" + arr);
-
     }
 }
