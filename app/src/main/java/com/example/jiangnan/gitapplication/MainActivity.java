@@ -1,8 +1,11 @@
 package com.example.jiangnan.gitapplication;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -11,16 +14,28 @@ import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    private Button getData;
     private boolean DEBUG = true;
     private String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getData = (Button) findViewById(R.id.into_net);
+        get();
 
         sortForTime();
         ListSort();
+    }
+
+    private void get(){
+        getData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mIntent = new Intent(MainActivity.this , NetWorfkActivity.class);
+                startActivity(mIntent);
+            }
+        });
     }
 
     /***********************************************时间从小到大的排序算法*******************************************************/
