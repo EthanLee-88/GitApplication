@@ -1,4 +1,4 @@
-package com.example.jiangnan.gitapplication;
+package com.example.jiangnan.gitapplication.UI;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import java.sql.Array;
+import com.example.jiangnan.gitapplication.R;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;

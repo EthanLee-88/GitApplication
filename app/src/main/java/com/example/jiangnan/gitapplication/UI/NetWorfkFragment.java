@@ -1,4 +1,4 @@
-package com.example.jiangnan.gitapplication;
+package com.example.jiangnan.gitapplication.UI;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,15 +9,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.jiangnan.gitapplication.Data.AccountData;
+import com.example.jiangnan.gitapplication.Data.ParseLoginData;
+import com.example.jiangnan.gitapplication.R;
+import com.example.jiangnan.gitapplication.Util.ThreadPoolUtil;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.net.HttpURLConnection;
-import java.net.ProtocolException;
 import java.net.URL;
-import java.sql.Array;
 import java.util.ArrayList;
 
 /**
@@ -54,6 +57,12 @@ public class NetWorfkFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 createParamAndUrl();
+            }
+        });
+        other.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                readData();
             }
         });
     }
@@ -128,6 +137,9 @@ public class NetWorfkFragment extends Fragment {
 //                        Log.d("NetWorfkFragment" , "打印字节=" + bytes[i]);
 //                    }
                     ReSult = new String(bytes , "utf-8");
+
+                    ParseLoginData parseLoginData =new ParseLoginData(getActivity());
+                    parseLoginData.ParseJson(ReSult);
                 }
                 inputStream.close();
             }
@@ -136,6 +148,10 @@ public class NetWorfkFragment extends Fragment {
             Log.e("NetWorfkFragment", parseException(e));
         }
         Log.d("NetWorfkFragment","登录返回数据=" + ReSult);
+    }
+
+    private void readData(){
+        Log.d("NetWorfkFragment","读取登录的缓存信息" + AccountData.getInstance().LoginTaken + "账号" + AccountData.getInstance().Tel);
     }
 
     public static String parseException(Throwable throwable) {

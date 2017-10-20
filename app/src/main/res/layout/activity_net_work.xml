@@ -9,7 +9,7 @@
              android:id="@+id/net_work_fragment"
              android:layout_height="match_parent"
              android:layout_width="match_parent"
-             android:name="com.example.jiangnan.gitapplication.NetWorfkFragment"
+             android:name="com.example.jiangnan.gitapplication.UI.NetWorfkFragment"
              />
     </FrameLayout>
 </LinearLayout>
