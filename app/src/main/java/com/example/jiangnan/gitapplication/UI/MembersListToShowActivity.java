@@ -2,7 +2,9 @@ package com.example.jiangnan.gitapplication.UI;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.example.jiangnan.gitapplication.R;
 
@@ -11,9 +13,10 @@ import com.example.jiangnan.gitapplication.R;
  */
 
 public class MembersListToShowActivity extends AppCompatActivity {
+
     @Override
-    public void onCreate( Bundle savedInstanceState,  PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate( Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_members_list_to_show);
     }
 }
