@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jiangnan.gitapplication.Data.AccountData;
 import com.example.jiangnan.gitapplication.Data.ParseLoginData;
@@ -30,6 +32,7 @@ import java.util.ArrayList;
 public class NetWorkFragment extends Fragment {
     private Button getData , other;
     private TextView mtextView;
+    private EditText MeditText;
     protected static int DEFAULT_CONNECT_TIMEOUT = 20000;
     protected static int DEFAULT_READ_TIMEOUT = 120000;
 
@@ -49,6 +52,7 @@ public class NetWorkFragment extends Fragment {
         getData = (Button) view.findViewById(R.id.get_data);
         other = (Button) view.findViewById(R.id.other);
         mtextView = (TextView) view.findViewById(R.id.show_feedback);
+        MeditText = (EditText) view.findViewById(R.id.password_enter);
 
         netWork();
     }
@@ -56,7 +60,11 @@ public class NetWorkFragment extends Fragment {
         getData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createParamAndUrl();
+                if(!MeditText.getText().toString().isEmpty()){
+                    createParamAndUrl();
+                }else {
+                    Toast.makeText(getActivity(), "密码不能为空", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         other.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +83,7 @@ public class NetWorkFragment extends Fragment {
         }catch (Exception e){
 
         }
-        final String params = "{\"tel\":\"" + "13267169575" + "\",\"pwd\":\"" + "jyt7758521" + "\"}";
+        final String params = "{\"tel\":\"" + "13267169575" + "\",\"pwd\":\"" + MeditText.getText().toString() + "\"}";
 
         Log.d("NetWorfkFragment","账号参数=" + params);
         Log.d("NetWorfkFragment","登录接口=" + PATH);
@@ -142,6 +150,8 @@ public class NetWorkFragment extends Fragment {
                     parseLoginData.ParseJson(ReSult);
                 }
                 inputStream.close();
+            }else {
+
             }
             HUconn.disconnect();
         }catch (Exception e){
