@@ -5,6 +5,9 @@ import android.util.Log;
 
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -68,10 +71,10 @@ public class GetMembers {
                         results.add((byte)cache);
                     }
                 }catch (Exception e){
-
+                    parseException(e);
                 }
                 if(results.size() == 0){
-
+                    Log.d("GetMembers" , "成员数据为空=" + result);
                 }else {
                     bytes = new byte[results.size()];
                     for(int i = 0 ; i < bytes.length ; i ++){
@@ -84,12 +87,24 @@ public class GetMembers {
             }
 
         }catch (Exception e){
-
+            parseException(e);
         }
         ParseMembersData parseMembersData = new ParseMembersData(mContext);
         parseMembersData.ParseMember(result);
 
     }
-
+    public static String parseException(Throwable throwable) {
+        Writer writer = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(writer);
+        throwable.printStackTrace(printWriter);
+        Throwable cause = throwable.getCause();
+        while (cause != null) {
+            cause.printStackTrace(printWriter);
+            cause = cause.getCause();
+        }
+        printWriter.close();
+        String result = writer.toString();
+        return result;
+    }
 
 }

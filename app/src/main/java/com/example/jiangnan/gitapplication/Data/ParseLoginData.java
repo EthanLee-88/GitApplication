@@ -24,21 +24,26 @@ public class ParseLoginData {
         try{
             JSONObject LoginObject = new JSONObject(json);
 
-            JSONObject data = LoginObject.getJSONObject("data");
+            if(LoginObject.getString("code").equals("0")){
 
-            AccountData.getInstance().LoginTaken = data.getString("token");
+                JSONObject data = LoginObject.getJSONObject("data");
 
-            AccountData.getInstance().Tel = data.getString("tel");
+                AccountData.getInstance().LoginTaken = data.getString("token");
 
-            AccountData.getInstance().pwd = data.getString("pwd");
+                AccountData.getInstance().Tel = data.getString("tel");
 
-            Log.d("ParseLoginData","token值=" + AccountData.getInstance().LoginTaken + "\n电话号码=" + AccountData.getInstance().Tel);
+                AccountData.getInstance().pwd = data.getString("pwd");
 
-            if(!AccountData.getInstance().LoginTaken.isEmpty()){
-                GetMembers getMembers = new GetMembers(mContext);
-                getMembers.getMembers(AccountData.getInstance().Tel , AccountData.getInstance().LoginTaken);
+                Log.d("ParseLoginData","token值=" + AccountData.getInstance().LoginTaken + "\n电话号码=" + AccountData.getInstance().Tel);
+
+                if(!AccountData.getInstance().LoginTaken.isEmpty()){
+                    GetMembers getMembers = new GetMembers(mContext);
+                    getMembers.getMembers(AccountData.getInstance().Tel , AccountData.getInstance().LoginTaken);
+                }
+
+            }else {
+                Log.e("ParseLoginData" , "登录失败");
             }
-
         }catch (Exception e){
                 Log.e("ParseLoginData" , parseException(e));
 

@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         getData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mIntent = new Intent(MainActivity.this , NetWorfkActivity.class);
+                Intent mIntent = new Intent(MainActivity.this , NetWorkActivity.class);
                 startActivity(mIntent);
             }
         });

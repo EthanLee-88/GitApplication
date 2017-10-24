@@ -1,6 +1,7 @@
 package com.example.jiangnan.gitapplication.Adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
@@ -12,10 +13,16 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.example.jiangnan.gitapplication.Data.AccountData;
+import com.example.jiangnan.gitapplication.Data.MemberIcon;
 import com.example.jiangnan.gitapplication.Data.Members;
 import com.example.jiangnan.gitapplication.R;
 import com.example.jiangnan.gitapplication.View.MyCircleImageView;
 
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -29,6 +36,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public OnItemClickListener MonItemClickListener;
 
     public RecyclerViewAdapter(Context context , ArrayList<Members> memberList){
+        AccountData.getInstance().membersIcon.clear();
         memberData = memberList;
         mcontext = context;
         Log.d("RecyclerViewAdapter" , "昵称=" + memberData.get(1).nickname);
@@ -75,6 +83,26 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.nickName.setText(memberData.get(position).nickname);
         holder.memberIcon.setImageResource(R.drawable.icon_launcher_news_default);
 //        holder.memberIcon.setImageDrawable(memberData.get(position).i);
+
+        if(AccountData.getInstance().allMembers.size() != 0){
+                try{
+                    URL url = new URL(AccountData.getInstance().allMembers.get(position).picture);
+                    Glide.with(mcontext).load(url)
+                            .asBitmap()
+                            .dontAnimate()
+                            .into(new BitmapImageViewTarget(holder.memberIcon){
+                                @Override
+                                public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                    super.onResourceReady(resource, glideAnimation);
+                                    MemberIcon memberIcon = new MemberIcon();
+                                    memberIcon.bitmap = resource;
+                                    AccountData.getInstance().membersIcon.add(memberIcon);
+                                }
+                            });
+                }catch (Exception e){
+
+                }
+        }
     }
 
     @Override

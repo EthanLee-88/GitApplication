@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.jiangnan.gitapplication.UI.MembersListToShowActivity;
 import com.google.gson.Gson;
 
@@ -13,6 +15,7 @@ import org.json.JSONObject;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -48,6 +51,8 @@ public class ParseMembersData {
 
                     memberses.add(members1);
                 }
+            }else {
+                Log.d("ParseMembersData" , "获取成员失败");
             }
         }catch (Exception e){
             Log.d("ParseMembersData" ,parseException(e));
@@ -61,6 +66,7 @@ public class ParseMembersData {
             mcontext.startActivity(intent);
         }
     }
+
 
     public static String parseException(Throwable throwable) {
         Writer writer = new StringWriter();

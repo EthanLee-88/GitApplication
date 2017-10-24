@@ -20,6 +20,8 @@ public class AccountData {
 
     public ArrayList<Members> allMembers;
 
+    public ArrayList<MemberIcon> membersIcon;
+
     public AccountData(){}
 
     public static AccountData getInstance() {
@@ -32,5 +34,6 @@ public class AccountData {
 
     private static void Create(){
          familyData.allMembers = new ArrayList<Members>();
+        familyData.membersIcon = new ArrayList<MemberIcon>();
     }
 }
