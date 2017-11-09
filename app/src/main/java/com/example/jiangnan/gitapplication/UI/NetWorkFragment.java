@@ -30,9 +30,8 @@ import java.util.ArrayList;
  */
 
 public class NetWorkFragment extends Fragment {
-    private Button getData , other;
-    private TextView mtextView;
-    private EditText MeditText;
+    private Button getData ;
+    private EditText MeditText , AccountNum;
     protected static int DEFAULT_CONNECT_TIMEOUT = 20000;
     protected static int DEFAULT_READ_TIMEOUT = 120000;
 
@@ -50,9 +49,8 @@ public class NetWorkFragment extends Fragment {
     }
     private void initRes (View view){
         getData = (Button) view.findViewById(R.id.get_data);
-        other = (Button) view.findViewById(R.id.other);
-        mtextView = (TextView) view.findViewById(R.id.show_feedback);
         MeditText = (EditText) view.findViewById(R.id.password_enter);
+        AccountNum = (EditText) view.findViewById(R.id.account_num_enter);
 
         netWork();
     }
@@ -67,12 +65,6 @@ public class NetWorkFragment extends Fragment {
                 }
             }
         });
-        other.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                readData();
-            }
-        });
     }
 
     private void createParamAndUrl(){
@@ -83,7 +75,7 @@ public class NetWorkFragment extends Fragment {
         }catch (Exception e){
 
         }
-        final String params = "{\"tel\":\"" + "13267169575" + "\",\"pwd\":\"" + MeditText.getText().toString() + "\"}";
+        final String params = "{\"tel\":\"" + AccountNum.getText().toString() + "\",\"pwd\":\"" + MeditText.getText().toString() + "\"}";
 
         Log.d("NetWorfkFragment","账号参数=" + params);
         Log.d("NetWorfkFragment","登录接口=" + PATH);
