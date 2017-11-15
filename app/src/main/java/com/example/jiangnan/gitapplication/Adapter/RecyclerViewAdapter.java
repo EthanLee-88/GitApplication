@@ -60,8 +60,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         memberIcon = (MyCircleImageView) view.findViewById(R.id.member_icon);
         nickName = (TextView) view.findViewById(R.id.nick_name);
         memberIcon.isThis = true;
-        memberIcon.setBorderWidth(3);
-        memberIcon.setBorderColor(Color.BLUE);
+//        memberIcon.setBorderWidth(3);
+//        memberIcon.setBorderColor(Color.BLUE);
         ll = (LinearLayout) view;
         ll.setOnClickListener(this);
         }

@@ -21,10 +21,12 @@ public class MyCircleImageView extends CircleImageView {
     public MyCircleImageView(Context context) {
         super(context);
         setAlpha(isThis ? selectAlpha :unSelectAlpha);
+
     }
 
     public MyCircleImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        startAni( 1, 0.8f, 250, 0);
     }
 
     @Override
@@ -63,6 +65,6 @@ public class MyCircleImageView extends CircleImageView {
                 ObjectAnimator.ofFloat(this, "scaleY", beginScal, endScal).setDuration(time)
         );
         scaleAni.start();
-        setAlpha(isThis ? selectAlpha :unSelectAlpha);
+        setAlpha(isThis ? selectAlpha :selectAlpha);
     }
 }
